@@ -1,4 +1,42 @@
 Base: RPG 2.5d top down
 
 Enemystats:
+  int health
+  double agility
+  int damage
+  int attacks[]
+  int tEntity
+Enemymethods:
+  entitytrack(entity)
+  attack()
+  die()
+Bossstats:
+  int health
+  double agility
+  int damage
+  int attacks[]
+  int summoned
+  int phase
+  int tEntity
+bossmethods:
+  entitytrack()
+  attack()
+  die()
+  summon()
 Charstats:
+  int Health
+  int Shield
+  double Agility
+  double Strength
+  double Power
+  double Defence
+  int Mana
+  double Intelligence
+Charmethods:
+  MoveXY(pX,pY)
+  hAtttack()
+  mAttack()
+  sidespell1()
+  sidespell2()
+  item()
+  inv()
