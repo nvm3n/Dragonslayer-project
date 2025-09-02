@@ -1,4 +1,7 @@
 Base: RPG 2.5d top down
+fantasy, inventory, weapon items, armor items, spellcasting weapons, sidespells, items for statboosts and heals, map
+
+
 
 Enemystats:
   int health
