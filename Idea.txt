@@ -1,7 +1,6 @@
 Base: Open World RPG 2.5d top down
 fantasy, inventory, weapon items, armor items, spellcasting weapons, sidespells, items for statboosts and heals, map
 
-leg eier
 
 Enemystats:
   int health
