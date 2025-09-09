@@ -1,1 +1,1 @@
-https://libgdx.com/
+https://godot-kotl.in/en/stable/
