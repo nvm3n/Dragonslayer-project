@@ -1,4 +1,3 @@
-package java;
 public class Enemy {
     protected String name;
     protected int baseHealth, basePower;
@@ -13,9 +12,15 @@ public class Enemy {
         this.attacks = attacks;
     }
 
-    public int getHealth(double multiplier) { return (int)(baseHealth * multiplier); }
-    public double getAgility(double multiplier) { return baseAgility * multiplier; }
-    public int getPower(double multiplier) { return (int)(basePower * multiplier); }
+    public void dealDamage(int damage) {
+        this.baseHealth -= damage;
+        if (this.baseHealth < 0) this.baseHealth = 0;
+    }
+
+    public int getHealth() { return (int)(baseHealth); }
+    public double getAgility() { return baseAgility; }
+    public int getPower() { return (int)(basePower); }
+    public Attack[] getAttacks() { return attacks; }
     public String getName() { return name; }
     // Other combat methods
 }

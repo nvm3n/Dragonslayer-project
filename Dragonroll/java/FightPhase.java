@@ -6,6 +6,7 @@ public class FightPhase {
     private Enemy enemy;
     private Scanner scanner;
     private Random rand = new Random();
+    private double damageCalcMultiplier = 0.1;
 
     public FightPhase(Player player, Enemy enemy, Scanner scanner) {
         this.player = player;
@@ -17,13 +18,12 @@ public class FightPhase {
         System.out.println("\n--- Fight Phase ---");
         boolean fightOngoing = true;
 
-        // Example: Both combatants start with full stats for this fight
         int playerHealth = player.getHealth();
-        int enemyHealth = enemy.getHealth(1.0); // Pass multiplier if needed
+        int enemyHealth = enemy.getHealth();
 
         while (fightOngoing) {
             // Determine turn order (agility-based)
-            boolean playerFirst = determineTurnOrder(player.getAgility(), enemy.getAgility(1.0));
+            boolean playerFirst = determineTurnOrder(player.getAgility(), enemy.getAgility());
 
             if (playerFirst) {
                 fightOngoing = playerTurn();
@@ -44,6 +44,12 @@ public class FightPhase {
     }
 
     private boolean playerTurn() {
+        if (player.getMana() < player.getMaxMana())
+        {
+            player.regenMana();
+            System.out.println("You regenerated some mana. Current mana: " + player.getMana() + "/" + player.getMaxMana());
+        }
+        player.regenMana();
         System.out.println("\nYour turn! Choose an action:");
         System.out.println("1. Attack");
         System.out.println("2. Use Consumable");
@@ -54,9 +60,43 @@ public class FightPhase {
 
         switch (choice) {
             case 1:
-                // TODO: Implement attack selection and execution
-                System.out.println("You attack the enemy!");
-                // Example: Check for dodge, calculate damage, apply to enemy
+                // Attack selection
+                Weapon weapon = player.getEquippedWeapon();
+                Attack[] attacks = weapon.getAttacks();
+                System.out.println("Choose your attack:");
+                for (int i = 0; i < attacks.length; i++) {
+                    if (attacks[i].isMagic() && player.getMana() < attacks[i].getManaCost()) {
+                        System.out.println((i + 1) + ". " + attacks[i].getName() + " (Not enough mana)");
+                    } else
+                    System.out.println((i + 1) + ". " + attacks[i].getName());
+                }
+                int attackChoice = scanner.nextInt() - 1;
+                scanner.nextLine();
+                Attack chosenAttack = attacks[attackChoice];
+
+                // Dodge check
+                double dodgeChance = Math.min(0.05, enemy.getAgility() / 100); // Example formula
+                if (rand.nextDouble() < dodgeChance) {
+                    System.out.println("Enemy dodged your attack!");
+                    break;
+                }
+
+                // Damage calculation
+                int damage = chosenAttack.getBaseStrength();
+                if (chosenAttack.isMagic()) {
+                    damage = (int)(damage * damageCalcMultiplier * player.getIntelligence());
+                    player.drainMana(chosenAttack.getManaCost());
+                } else {
+                    damage = (int)(damage * damageCalcMultiplier * player.getPower());
+                }
+                enemy.dealDamage(damage);
+                System.out.println("You dealt " + damage + " damage!");
+
+                // Check if enemy is defeated
+                if (enemy.getHealth() <= 0) {
+                    System.out.println("Enemy defeated!");
+                    return false;
+                }
                 break;
             case 2:
                 // TODO: Implement consumable use
@@ -69,17 +109,36 @@ public class FightPhase {
             default:
                 System.out.println("Invalid choice, you lose your turn!");
         }
-        // TODO: Check if enemy is defeated
-        // Return false if fight should end
         return true;
     }
 
     private boolean enemyTurn() {
         System.out.println("\nEnemy's turn!");
-        // TODO: Randomly select attack, check for dodge, calculate damage, apply to player
-        System.out.println("The enemy attacks you!");
-        // TODO: Check if player is defeated
-        // Return false if fight should end
+        // Randomly select attack
+        Attack[] attacks = enemy.getAttacks();
+        int attackIndex = rand.nextInt(attacks.length);
+        Attack chosenAttack = attacks[attackIndex];
+        System.out.println("Enemy uses " + chosenAttack.getName() + "!");
+
+        // Dodge check
+        double dodgeChance = Math.min(0.05, player.getAgility() / 1000); // Example formula
+        if (rand.nextDouble() < dodgeChance) {
+            System.out.println("You dodged the attack!");
+            return true;
+        }
+
+        // Damage calculation
+        int damage = (int)(chosenAttack.getBaseStrength() * damageCalcMultiplier * enemy.getPower() / damageCalcMultiplier * player.getDefence());
+        if (damage < 1) damage = 1;
+        player.dealDamage(damage);
+        System.out.println("You took " + damage + " damage!");
+
+        // Check if player is defeated
+        if (player.getHealth() <= 0) {
+            System.out.println("You were defeated!");
+            return false;
+        }
         return true;
     }
 }
+

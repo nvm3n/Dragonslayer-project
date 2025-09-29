@@ -69,7 +69,7 @@ public class Game {
     }
 
     private void startFight() {
-        Enemy enemy = EnemyFactory.createRandomEnemy(bossesDefeated); // Pass multiplier
+        Enemy enemy = EnemyFactory.createRandomEnemy(bossesDefeated);
         System.out.println("\nA wild " + enemy.getName() + " appears!");
         FightPhase fight = new FightPhase(player, enemy, scanner);
         fight.run();
@@ -81,7 +81,6 @@ public class Game {
 
     private void gameOver() {
         System.out.println("\n--- GAME OVER ---");
-        System.out.println("You have been defeated.");
         System.out.println("Restarting game...\n");
     }
 
@@ -89,3 +88,4 @@ public class Game {
         new Game().start();
     }
 }
+

@@ -1,10 +1,9 @@
-package java;
 import java.util.Random;
 
 public class EnemyFactory {
 
     public static Enemy createRandomEnemy(int bossesDefeated) {
-        double multiplier = 1.0 + bossesDefeated * 0.15; // Example scaling
+        double multiplier = 1.0 + (bossesDefeated * 0.15);
         Random rand = new Random();
         Enemy randomEnemy = EnemyDatabase.BASE_ENEMIES[rand.nextInt(EnemyDatabase.BASE_ENEMIES.length)];
         // Return a new Enemy with scaled stats
