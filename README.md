@@ -1,2 +1,3 @@
-# Dragonslayer-project
-Noch nix speziFISCHes
+# Dragonroll
+
+Heavily RNG based, Turn based RPG
