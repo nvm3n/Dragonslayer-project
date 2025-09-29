@@ -1,0 +1,59 @@
+fantasy, inventory, weapon items, armor items, spellcasting weapons, items for statboosts and heals, randomized effect cards, shops, randomized enemy loot
+
+
+
+Enemystats:
+  int health
+  double agility
+  int power
+  int attacks[]
+Bossstats:
+  int health
+  double agility
+  int power
+  int attacks[]
+  int summoned
+  int phase
+Playerstats:
+  int Health
+  int Shield
+  double Agility
+  double Strength
+  double Power
+  double Defence
+  int Mana
+  double Intelligence
+Playermethods:
+  Attack()
+  item()
+  inv()
+
+
+turnbased game
+melee weapons and spellcasting/magic weapons;
+magics consume mana when attacking
+weapons can be switched out but they "consume" a turn similar to switching pokemons
+armor items can only be edited between/after fight
+there should be fight phases and break phases where the player has time to think about their strategy and manage inventory equipment etc.
+after defeating bosses the player should get a choice to recieve one of three randomized wildcards that boost their stats or add special effects like life stealing (this should be implemented so that these special effects are applied as invisible "side"-weapons of which an infinite amount can be equipped, so that modifying and creating them is easy)
+in a fight phase during the players turn he should be able to use consumable items such as heal potions and stat-buffing potions and then the player should be able to switch weapons as already noted or attack, ending the turn
+agility is used for calucating the propability of who attacks first (higher agility = higher propability to attack first) and dodging(on every attack the player or enemy has a small propability (around 0.1% - 5%),that is based on the agility stat, to completely avoid the attack)
+mana regenerates with time (after every turn, regeneration rate is Intelligence based)
+strength is used to calculate the max weight of equipment the player can carry (this only includes equipped items, every item has a weight stat besides consumables and wildcards)
+shield is "extra hp" obtainable by certain abilities, wildcards or consumables
+damage calculation works as following:
+  dealt by player:
+    increased with player power when using melees and player Intelligence when using magics
+    no decreases
+  dealt by enemy:
+    increased by enemy power (no matter what kind of attack theyre using)
+    decreased with player defence
+note: attacks themselves have a base strength stat and weapons can have multiple different attacks
+attacks are executed using a unique system:
+  a dice is rolled to determine which attack gets used (attackpool is set by the players equipped weapon or if its the enemy attacking a pre defined movepool)
+  higher numbers mean stronger attacks
+  d20 dice are used
+there should be a relatively small propability of around 8-15% of a shop appearing, after an enemy is defeated, offering 5 random items
+all items (armor, weapons, consumables, wildcards) should have rarities ranging from common, uncommon, rare, epic, legendary, mythic, secret, so common-legendary items should provide stat boosts with legenadaries giving the best ones of these, in addition mythics should provide special effects, and secrets should provide exeptional stat boosts with unique effects
+  -> secrets should have chances of 0.01-0.1% mythics should have chances of 0.1-1%, legendaries 1-5%, epics 5-10%, rares 10-25%, uncommons 25-40%, and commons 50-60%(these are just orientation numbers stronger enemies, bosses or shops should obviously have better droprates, eg. a boss could even have 10% common rates and some enemies (including all bosses) should give multiple drops)
+enemy and boss difficulty should increase with time but their drops should scale accordingly
