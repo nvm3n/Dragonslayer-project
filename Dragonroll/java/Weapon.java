@@ -1,4 +1,3 @@
-package java;
 public class Weapon extends Item {
     private Attack[] attacks;
     private boolean isMagic;

@@ -1,4 +1,3 @@
-package java;
 public class Boss extends Enemy {
     private int summoned = 0, phase = 1;
 

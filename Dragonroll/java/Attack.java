@@ -1,4 +1,3 @@
-package java;
 public class Attack {
     private String name;
     private int basePower, manaCost;

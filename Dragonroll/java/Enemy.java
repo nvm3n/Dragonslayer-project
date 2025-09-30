@@ -1,4 +1,3 @@
-package java;
 public class Enemy {
     protected String name;
     protected int baseHealth, basePower;

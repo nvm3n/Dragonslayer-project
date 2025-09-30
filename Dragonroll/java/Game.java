@@ -26,16 +26,14 @@ public class Game {
 
     private void chooseClass() {
         System.out.println("\nChoose your class:");
-        System.out.println("1. Warrior (Sword, Shield, Health Potion)");
-        System.out.println("2. Mage (Magic Staff, Mana Potion, Spellbook)");
-        System.out.println("3. Rogue (Daggers, Agility Potion, Smoke Bomb)");
+        System.out.println("1. Warrior (Sword)");
+        System.out.println("2. Mage (Magic Wand)");
         System.out.print("Enter choice: ");
         int choice = scanner.nextInt();
         scanner.nextLine(); // consume newline
         switch (choice) {
             case 1: player.giveStartingItems(ClassType.WARRIOR); break;
             case 2: player.giveStartingItems(ClassType.MAGE); break;
-            case 3: player.giveStartingItems(ClassType.ROGUE); break;
             default: System.out.println("Invalid choice, defaulting to Warrior.");
                      player.giveStartingItems(ClassType.WARRIOR);
         }

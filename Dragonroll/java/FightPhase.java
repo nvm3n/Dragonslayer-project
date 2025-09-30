@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class FightPhase {
     private Player player;
     private Enemy enemy;
@@ -64,7 +65,8 @@ public class FightPhase {
                 break;
             case 3:
                 // TODO: Implement weapon switching
-                System.out.println("You switch your weapon (not yet implemented).");
+                System.out.println("You switch your weapon.");
+                    
                 break;
             default:
                 System.out.println("Invalid choice, you lose your turn!");
@@ -78,6 +80,8 @@ public class FightPhase {
         System.out.println("\nEnemy's turn!");
         // TODO: Randomly select attack, check for dodge, calculate damage, apply to player
         System.out.println("The enemy attacks you!");
+        
+
         // TODO: Check if player is defeated
         // Return false if fight should end
         return true;
