@@ -1,4 +1,3 @@
-package java;
 public class Attack {
     private String name;
     private int basePower, manaCost;
@@ -10,5 +9,9 @@ public class Attack {
         this.isMagic = isMagic;
         this.manaCost = manaCost;
     }
-    // Getters
+
+    public String getName() { return name; }
+    public int getBaseStrength() { return basePower; }
+    public boolean isMagic() { return isMagic; }
+    public int getManaCost() { return manaCost; }
 }

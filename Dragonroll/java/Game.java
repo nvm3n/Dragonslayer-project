@@ -26,16 +26,14 @@ public class Game {
 
     private void chooseClass() {
         System.out.println("\nChoose your class:");
-        System.out.println("1. Warrior (Sword, Shield, Health Potion)");
-        System.out.println("2. Mage (Magic Staff, Mana Potion, Spellbook)");
-        System.out.println("3. Rogue (Daggers, Agility Potion, Smoke Bomb)");
+        System.out.println("1. Warrior (Sword, Leather Armor)");
+        System.out.println("2. Mage (Magic Wand, Mage Robe)"); //thilo der ersteller ruft an
         System.out.print("Enter choice: ");
         int choice = scanner.nextInt();
         scanner.nextLine(); // consume newline
         switch (choice) {
             case 1: player.giveStartingItems(ClassType.WARRIOR); break;
             case 2: player.giveStartingItems(ClassType.MAGE); break;
-            case 3: player.giveStartingItems(ClassType.ROGUE); break;
             default: System.out.println("Invalid choice, defaulting to Warrior.");
                      player.giveStartingItems(ClassType.WARRIOR);
         }
@@ -69,7 +67,7 @@ public class Game {
     }
 
     private void startFight() {
-        Enemy enemy = EnemyFactory.createRandomEnemy(bossesDefeated); // Pass multiplier
+        Enemy enemy = EnemyFactory.createRandomEnemy(bossesDefeated);
         System.out.println("\nA wild " + enemy.getName() + " appears!");
         FightPhase fight = new FightPhase(player, enemy, scanner);
         fight.run();
@@ -81,7 +79,6 @@ public class Game {
 
     private void gameOver() {
         System.out.println("\n--- GAME OVER ---");
-        System.out.println("You have been defeated.");
         System.out.println("Restarting game...\n");
     }
 
@@ -89,3 +86,6 @@ public class Game {
         new Game().start();
     }
 }
+
+
+//TODO: shops, saving/loading

@@ -1,4 +1,3 @@
-package java;
 public abstract class Item {
     protected String name;
     protected Rarity rarity;
