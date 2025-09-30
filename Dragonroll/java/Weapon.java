@@ -1,3 +1,4 @@
+package java;
 public class Weapon extends Item {
     private Attack[] attacks;
     private boolean isMagic;
@@ -9,6 +10,4 @@ public class Weapon extends Item {
         this.isMagic = isMagic;
     }
     // Getters
-    public Attack[] getAttacks() { return attacks; }
-    public boolean getIsMagic() { return isMagic; }
 }
