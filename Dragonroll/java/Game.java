@@ -5,6 +5,7 @@ public class Game {
     private int bossesDefeated = 0;
     private boolean running = true;
     private Scanner scanner = new Scanner(System.in);
+    private boolean freshStart = true;
 
     public void start() {
         System.out.println("Welcome to Dragonroll!");
@@ -42,7 +43,12 @@ public class Game {
     private void mainMenu() {
         while (true) {
             System.out.println("\n--- Main Menu ---");
-            System.out.println("1. Continue");
+            if (freshStart == true){
+                    System.out.println("1. Start Game");
+                    freshStart = false;
+            }else{
+                System.out.println("1. Continue");
+            }
             System.out.println("2. View Inventory");
             System.out.println("3. View Stats");
             System.out.println("4. Quit");
