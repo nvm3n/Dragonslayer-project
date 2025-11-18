@@ -27,10 +27,12 @@ public class FightPhase {
             boolean playerFirst = determineTurnOrder(player.getAgility(), enemy.getAgility());
 
             if (playerFirst) {
+                System.out.println("Du fängst zuerst an!");
                 fightOngoing = playerTurn();
                 if (!fightOngoing) break;
                 fightOngoing = enemyTurn();
             } else {
+                System.out.println("Der Gegner fängt zuerst an!");
                 fightOngoing = enemyTurn();
                 if (!fightOngoing) break;
                 fightOngoing = playerTurn();
