@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class FightPhase {
     private Player player;
@@ -26,10 +27,12 @@ public class FightPhase {
             boolean playerFirst = determineTurnOrder(player.getAgility(), enemy.getAgility());
 
             if (playerFirst) {
+                System.out.println("Du fängst zuerst an!");
                 fightOngoing = playerTurn();
                 if (!fightOngoing) break;
                 fightOngoing = enemyTurn();
             } else {
+                System.out.println("Der Gegner fängt zuerst an!");
                 fightOngoing = enemyTurn();
                 if (!fightOngoing) break;
                 fightOngoing = playerTurn();
@@ -91,6 +94,8 @@ public class FightPhase {
                 }
                 enemy.dealDamage(damage);
                 System.out.println("You dealt " + damage + " damage!");
+                System.out.println("You have " + player.getHealth() + " health!");
+                System.out.println("The enemy has " + enemy.getHealth() + " health!");
 
                 // Check if enemy is defeated
                 if (enemy.getHealth() <= 0) {
@@ -99,14 +104,27 @@ public class FightPhase {
                     //TODO: IMPORTANT!!! LOOT SYSTEM
                 }
                 break;
-            case 2:
+            /*case 2:
                 // TODO: Implement consumable use
                 System.out.println("You use a consumable (not yet implemented).");
-                break;
+                break;*/
             case 3:
-                // TODO: Implement weapon switching
-                System.out.println("You switch your weapon (not yet implemented).");
+                ArrayList<String> weapons = player.getInventory().getWeapons();
+                if (weapons.size() <= 1){
+                    System.out.println("You have no other weapons to switch to.");
+
+                    break;
+                }
+                System.out.println("Choose a weapon to equip: " + weapons);
+                String inputWeapon = scanner.nextLine();
+                if (weapons.contains(inputWeapon)){
+                    player.equipWeapon(inputWeapon);
+                    System.out.println("Equipped " + inputWeapon + ".");
+                } else {
+                    System.out.println("Invalid selection, choose a valid weapon!");
+                }
                 break;
+                
             default:
                 System.out.println("Invalid choice, you lose your turn!");
         }
@@ -129,10 +147,13 @@ public class FightPhase {
         }
 
         // Damage calculation
-        int damage = (int)(chosenAttack.getBaseStrength() * damageCalcMultiplier * enemy.getPower() / damageCalcMultiplier * player.getDefence());
+        // Formula: (BaseStrength * EnemyPower * Multiplier) - (Defence * Multiplier)
+        int damage = (int)(((chosenAttack.getBaseStrength() * enemy.getPower()) - (player.getDefence())) * damageCalcMultiplier);
         if (damage < 1) damage = 1;
         player.dealDamage(damage);
         System.out.println("You took " + damage + " damage!");
+        System.out.println("You have " + player.getHealth() + " health!");
+        System.out.println("The enemy has " + enemy.getHealth() + " health!");
 
         // Check if player is defeated
         if (player.getHealth() <= 0) {
@@ -142,5 +163,3 @@ public class FightPhase {
         return true;
     }
 }
-
-//TODO: something fishy is going on here damage calculation wise: damage is way too high for whatever reason

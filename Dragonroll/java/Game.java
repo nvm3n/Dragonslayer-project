@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Game {
     private Player player;
@@ -51,7 +52,9 @@ public class Game {
             }
             System.out.println("2. View Inventory");
             System.out.println("3. View Stats");
-            System.out.println("4. Quit");
+            System.out.println("4. Switch Weapon");
+            System.out.println("5. Switch Armor");
+            System.out.println("6. Quit");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // consume newline
@@ -66,7 +69,37 @@ public class Game {
                     break;
                 case 2: player.getInventory().showInventory(); break;
                 case 3: player.showStats(); break;
-                case 4: running = false; System.out.println("Thanks for playing!"); return;
+                case 4: ArrayList<String> weapons = player.getInventory().getWeapons();
+                if (weapons.size() <= 1){
+                    System.out.println("You have no other weapons to switch to.");
+                    
+                    break;
+                }
+                System.out.println("Choose a weapon to equip: " + weapons);
+                String inputWeapon = scanner.nextLine();
+                if (weapons.contains(inputWeapon)){
+                    player.equipWeapon(inputWeapon);
+                    System.out.println("Equipped " + inputWeapon + ".");
+                } else {
+                    System.out.println("Invalid selection, choose a valid weapon!");
+                }
+                break;
+                case 5: ArrayList<String> armor = player.getInventory().getArmors();
+                if (armor.size() <= 1){
+                    System.out.println("You have no other Armor to switch to.");
+                    
+                    break;
+                }
+                System.out.println("Choose a weapon to equip: " + armor);
+                String inputArmor = scanner.nextLine();
+                if (armor.contains(inputArmor)){
+                    player.equipArmor(inputArmor);
+                    System.out.println("Equipped " + inputArmor + ".");
+                } else {
+                    System.out.println("Invalid selection, choose a valid weapon!");
+                }
+                break;
+                case 6: running = false; System.out.println("Thanks for playing!"); return;
                 default: System.out.println("Invalid choice.");
             }
         }

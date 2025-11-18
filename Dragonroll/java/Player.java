@@ -10,8 +10,8 @@ public class Player {
 
     public void giveStartingItems(ClassType classType) {
         switch (classType) {
-            case WARRIOR: inventory.addWeapon("Sword"); break;
-            case MAGE: inventory.addWeapon("Magic Wand"); break;
+            case WARRIOR: inventory.addWeapon("Sword"); inventory.addWeapon("Leather Armor"); equipWeapon("Sword"); equipArmor("Leather Armor"); ;break;
+            case MAGE: inventory.addWeapon("Magic Wand"); inventory.addArmor("Mage Robe"); equipArmor("Magic Wand"); equipArmor("Mage Robe");break;
         }
     }
 
@@ -52,9 +52,55 @@ public class Player {
         System.out.println("Equipped Weapon: " + (equippedWeapon != null ? equippedWeapon.getName() : "None"));
         System.out.println("Equipped Armor: " + (equippedArmor != null ? equippedArmor.getName() : "None"));
     }
-    // Methods: attack, useItem, switchWeapon, etc.
 
-    
+    public Weapon getequippedWeapon() { return equippedWeapon; }
+    public Armor getequippedArmor() { return equippedArmor; }
+    public void setWeapon(Weapon EQ) { equippedWeapon = EQ; }
+    public void setArmor(Armor EA) { equippedArmor = EA; }
+
+    // Equipment methods - allows equipping weapons and armor from inventory
+    public boolean equipWeapon(String weaponName) {
+        // Search for weapon in inventory
+        for (String invWeaponName : inventory.getWeapons()) {
+            if (invWeaponName.equalsIgnoreCase(weaponName)) {
+                // Find the actual Weapon object from the database
+                Weapon weaponToEquip = WeaponDatabase.findWeaponByName(weaponName);
+                if (weaponToEquip != null) {
+                    // Unequip current weapon if one is equipped
+                    if (equippedWeapon != null) {
+                        System.out.println("Unequipping: " + equippedWeapon.getName()); 
+                    }
+                    // Equip new weapon
+                    equippedWeapon = weaponToEquip;
+                    System.out.println("Equipped weapon: " + equippedWeapon.getName());
+                    return true;
+                }
+            }
+        }
+        System.out.println("Weapon '" + weaponName + "' not found in inventory!");
+        return false;
+    }
+
+    public boolean equipArmor(String armorName) {
+        // Search for armor in inventory
+        for (String invArmorName : inventory.getArmors()) {
+            if (invArmorName.equalsIgnoreCase(armorName)) {
+                // Find the actual Armor object from the database
+                Armor armorToEquip = ArmorDatabase.findArmorByName(armorName);
+                if (armorToEquip != null) {
+                    // Unequip current armor if one is equipped
+                    if (equippedArmor != null) {
+                        System.out.println("Unequipping: " + equippedArmor.getName());
+                    }
+                    // Equip new armor
+                    equippedArmor = armorToEquip;
+                    System.out.println("Equipped armor: " + equippedArmor.getName());
+                    return true;
+                }
+            }
+        }
+        System.out.println("Armor '" + armorName + "' not found in inventory!");
+        return false;
+    }
+
 }
-
-//TODO: WEAPON EQUIPPING!!!!!!!!
