@@ -47,6 +47,12 @@ public class FightPhase {
     }
 
     private boolean playerTurn() {
+        if (player.getMana() < player.getMaxMana())
+        {
+            player.regenMana();
+            System.out.println("You regenerated some mana. Current mana: " + player.getMana() + "/" + player.getMaxMana());
+        }
+        player.regenMana();
         System.out.println("\nYour turn! Choose an action:");
         System.out.println("1. Attack");
         System.out.println("2. Use Consumable");
