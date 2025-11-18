@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class FightPhase {
     private Player player;
@@ -44,12 +45,6 @@ public class FightPhase {
     }
 
     private boolean playerTurn() {
-        if (player.getMana() < player.getMaxMana())
-        {
-            player.regenMana();
-            System.out.println("You regenerated some mana. Current mana: " + player.getMana() + "/" + player.getMaxMana());
-        }
-        player.regenMana();
         System.out.println("\nYour turn! Choose an action:");
         System.out.println("1. Attack");
         System.out.println("2. Use Consumable");
@@ -104,9 +99,23 @@ public class FightPhase {
                 System.out.println("You use a consumable (not yet implemented).");
                 break;
             case 3:
-                // TODO: Implement weapon switching
-                System.out.println("You switch your weapon (not yet implemented).");
-                break;
+                ArrayList<String> weapons = new ArrayList<>();
+                weapons = player.getInventory().getWeapons();
+                if (weapons.size() == 1){
+                    System.out.println("You have no other weapons to switch to.");
+                    break;
+                }
+                System.out.println("Choose a weapon to equip:" + weapons);
+                String input = scanner.nextLine();
+                scanner.nextLine();
+                if (weapons.contains(input)){
+                    Weapon selected = input;
+                    Player.setWeapon(selected);
+                }else{
+                    System.out.println("Invalid selection, choose a valid weapon!");
+                    break;
+                }
+                
             default:
                 System.out.println("Invalid choice, you lose your turn!");
         }
@@ -129,7 +138,7 @@ public class FightPhase {
         }
 
         // Damage calculation
-        int damage = (int)(chosenAttack.getBaseStrength() * damageCalcMultiplier * enemy.getPower() / damageCalcMultiplier * player.getDefence());
+        int damage = (int)((chosenAttack.getBaseStrength() * enemy.getPower() / player.getDefence()) * damageCalcMultiplier);
         if (damage < 1) damage = 1;
         player.dealDamage(damage);
         System.out.println("You took " + damage + " damage!");
