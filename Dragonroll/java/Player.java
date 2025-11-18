@@ -10,8 +10,8 @@ public class Player {
 
     public void giveStartingItems(ClassType classType) {
         switch (classType) {
-            case WARRIOR: inventory.addWeapon("Sword"); break;
-            case MAGE: inventory.addWeapon("Magic Wand"); break;
+            case WARRIOR: inventory.addWeapon("Sword"); inventory.addArmor("Leather Armor"); equipWeapon("Sword"); equipArmor("Leather Armor"); break;
+            case MAGE: inventory.addWeapon("Magic Wand"); inventory.addArmor("Mage Robe"); equipArmor("Magic Wand"); equipArmor("Mage Robe");break;
         }
     }
 
@@ -52,7 +52,6 @@ public class Player {
         System.out.println("Equipped Weapon: " + (equippedWeapon != null ? equippedWeapon.getName() : "None"));
         System.out.println("Equipped Armor: " + (equippedArmor != null ? equippedArmor.getName() : "None"));
     }
-    //TODO: Methods: attack, useItem, switchWeapon, etc.
 
     public Weapon getequippedWeapon() { return equippedWeapon; }
     public Armor getequippedArmor() { return equippedArmor; }
@@ -69,7 +68,7 @@ public class Player {
                 if (weaponToEquip != null) {
                     // Unequip current weapon if one is equipped
                     if (equippedWeapon != null) {
-                        System.out.println("Unequipping: " + equippedWeapon.getName());
+                        System.out.println("Unequipping: " + equippedWeapon.getName()); //TODO
                     }
                     // Equip new weapon
                     equippedWeapon = weaponToEquip;

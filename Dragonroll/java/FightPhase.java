@@ -86,6 +86,8 @@ public class FightPhase {
                 }
                 enemy.dealDamage(damage);
                 System.out.println("You dealt " + damage + " damage!");
+                System.out.println("You have " + player.getHealth() + " health!");
+                System.out.println("The enemy has " + enemy.getHealth() + " health!");
 
                 // Check if enemy is defeated
                 if (enemy.getHealth() <= 0) {
@@ -94,27 +96,26 @@ public class FightPhase {
                     //TODO: IMPORTANT!!! LOOT SYSTEM
                 }
                 break;
-            case 2:
+            /*case 2:
                 // TODO: Implement consumable use
                 System.out.println("You use a consumable (not yet implemented).");
-                break;
+                break;*/
             case 3:
-                ArrayList<String> weapons = new ArrayList<>();
-                weapons = player.getInventory().getWeapons();
-                if (weapons.size() == 1){
+                ArrayList<String> weapons = player.getInventory().getWeapons();
+                if (weapons.size() <= 1){
                     System.out.println("You have no other weapons to switch to.");
+                    
                     break;
                 }
-                System.out.println("Choose a weapon to equip:" + weapons);
+                System.out.println("Choose a weapon to equip: " + weapons);
                 String input = scanner.nextLine();
-                scanner.nextLine();
                 if (weapons.contains(input)){
-                    Weapon selected = input;
-                    Player.setWeapon(selected);
-                }else{
+                    player.equipWeapon(input);
+                    System.out.println("Equipped " + input + ".");
+                } else {
                     System.out.println("Invalid selection, choose a valid weapon!");
-                    break;
                 }
+                break;
                 
             default:
                 System.out.println("Invalid choice, you lose your turn!");
@@ -138,10 +139,13 @@ public class FightPhase {
         }
 
         // Damage calculation
-        int damage = (int)((chosenAttack.getBaseStrength() * enemy.getPower() / player.getDefence()) * damageCalcMultiplier);
+        // Formula: (BaseStrength * EnemyPower * Multiplier) - (Defence * Multiplier)
+        int damage = (int)(((chosenAttack.getBaseStrength() * enemy.getPower()) - (player.getDefence())) * damageCalcMultiplier);
         if (damage < 1) damage = 1;
         player.dealDamage(damage);
         System.out.println("You took " + damage + " damage!");
+        System.out.println("You have " + player.getHealth() + " health!");
+        System.out.println("The enemy has " + enemy.getHealth() + " health!");
 
         // Check if player is defeated
         if (player.getHealth() <= 0) {
@@ -151,5 +155,3 @@ public class FightPhase {
         return true;
     }
 }
-
-//TODO: something fishy is going on here damage calculation wise: damage is way too high for whatever reason
