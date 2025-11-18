@@ -104,14 +104,14 @@ public class FightPhase {
                 ArrayList<String> weapons = player.getInventory().getWeapons();
                 if (weapons.size() <= 1){
                     System.out.println("You have no other weapons to switch to.");
-                    
+
                     break;
                 }
                 System.out.println("Choose a weapon to equip: " + weapons);
-                String input = scanner.nextLine();
-                if (weapons.contains(input)){
-                    player.equipWeapon(input);
-                    System.out.println("Equipped " + input + ".");
+                String inputWeapon = scanner.nextLine();
+                if (weapons.contains(inputWeapon)){
+                    player.equipWeapon(inputWeapon);
+                    System.out.println("Equipped " + inputWeapon + ".");
                 } else {
                     System.out.println("Invalid selection, choose a valid weapon!");
                 }
