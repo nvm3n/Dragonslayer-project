@@ -68,7 +68,7 @@ public class Player {
                 if (weaponToEquip != null) {
                     // Unequip current weapon if one is equipped
                     if (equippedWeapon != null) {
-                        System.out.println("Unequipping: " + equippedWeapon.getName()); //TODO
+                        System.out.println("Unequipping: " + equippedWeapon.getName()); 
                     }
                     // Equip new weapon
                     equippedWeapon = weaponToEquip;
