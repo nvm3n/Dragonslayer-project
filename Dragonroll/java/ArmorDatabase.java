@@ -2,7 +2,7 @@ public class ArmorDatabase {
     public static final Armor[] BASE_ARMORS = {
         new Armor("Leather Armor", Rarity.COMMON, 4.0),
         new Armor("Mage Robe", Rarity.UNCOMMON, 2.0),
-        // Add more armor here
+        // TODO: Add more armor
     };
 
     public static Armor findArmorByName(String name) {
