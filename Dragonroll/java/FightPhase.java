@@ -7,8 +7,8 @@ public class FightPhase {
     private Enemy enemy;
     private Scanner scanner;
     private Random rand = new Random();
-    private double damageCalcMultiplier = 0.1;
-
+    private final double damageCalcMultiplier = 0.1;
+    private int turncount = 0;
     public FightPhase(Player player, Enemy enemy, Scanner scanner) {
         this.player = player;
         this.enemy = enemy;
@@ -24,15 +24,42 @@ public class FightPhase {
 
         while (fightOngoing) {
             // Determine turn order (agility-based)
+            turncount ++;
             boolean playerFirst = determineTurnOrder(player.getAgility(), enemy.getAgility());
+            try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
+            System.out.println("\nTurn " + turncount + " begins.");
+
+            try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
 
             if (playerFirst) {
-                System.out.println("You attack first!");
+                System.out.println("\nYou attack first!");
+
+                try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
+                
                 fightOngoing = playerTurn();
                 if (!fightOngoing) break;
                 fightOngoing = enemyTurn();
             } else {
-                System.out.println("The Enemy attacks first!");
+                System.out.println("\nThe Enemy attacks first!");
+
+                try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
+                
                 fightOngoing = enemyTurn();
                 if (!fightOngoing) break;
                 fightOngoing = playerTurn();
@@ -52,7 +79,6 @@ public class FightPhase {
             player.regenMana();
             System.out.println("You regenerated some mana. Current mana: " + player.getMana() + "/" + player.getMaxMana());
         }
-        player.regenMana();
         System.out.println("\nYour turn! Choose an action:");
         System.out.println("1. Attack");
         System.out.println("2. Use Consumable");
@@ -81,6 +107,11 @@ public class FightPhase {
                 double dodgeChance = Math.min(0.05, enemy.getAgility() / 100); // Example formula
                 if (rand.nextDouble() < dodgeChance) {
                     System.out.println("Enemy dodged your attack!");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
                     break;
                 }
 
@@ -97,12 +128,23 @@ public class FightPhase {
                 System.out.println("You have " + player.getHealth() + " health!");
                 System.out.println("The enemy has " + enemy.getHealth() + " health!");
 
+                if (chosenAttack.isMagic()) {
+                    System.out.println("You have " + player.getMana() + " Mana.");
+                }
+
                 // Check if enemy is defeated
                 if (enemy.getHealth() <= 0) {
                     System.out.println("Enemy defeated!");
+
                     return false;
                     //TODO: IMPORTANT!!! LOOT SYSTEM
                 }
+
+                try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
                 break;
             /*case 2:
                 // TODO: Implement consumable use
@@ -113,6 +155,12 @@ public class FightPhase {
                 if (weapons.size() <= 1){
                     System.out.println("You have no other weapons to switch to.");
 
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
+
                     break;
                 }
                 System.out.println("Choose a weapon to equip: " + weapons);
@@ -122,11 +170,22 @@ public class FightPhase {
                     System.out.println("Equipped " + inputWeapon + ".");
                 } else {
                     System.out.println("Invalid selection, choose a valid weapon!");
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
                 }
                 break;
                 
             default:
                 System.out.println("Invalid choice, you lose your turn!");
+                try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
         }
         return true;
     }
@@ -137,7 +196,17 @@ public class FightPhase {
         Attack[] attacks = enemy.getAttacks();
         int attackIndex = rand.nextInt(attacks.length);
         Attack chosenAttack = attacks[attackIndex];
+        try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
         System.out.println("Enemy uses " + chosenAttack.getName() + "!");
+        try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
 
         // Dodge check
         double dodgeChance = Math.min(0.05, player.getAgility() / 1000); // Example formula
@@ -155,6 +224,17 @@ public class FightPhase {
         System.out.println("You have " + player.getHealth() + " health!");
         System.out.println("The enemy has " + enemy.getHealth() + " health!");
 
+        try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread();
+                    }
+        
+        //check for self inflicted or poisonlike damage
+        if (enemy.getHealth() <= 0) {
+            System.out.println("Enemy defeated!");
+            return false;
+        }
         // Check if player is defeated
         if (player.getHealth() <= 0) {
             System.out.println("You were defeated!");

@@ -1,7 +1,7 @@
 public class Player {
     private String name;
     private int health = 100, shield = 0, maxMana = 50, mana = 50;
-    private double agility = 10, strength = 10, power = 10, defence = 5, intelligence = 10;
+    private double agility = 13, strength = 14, power = 13, defence = 7, intelligence = 15;
     private Inventory inventory = new Inventory();
     private Weapon equippedWeapon;
     private Armor equippedArmor;
@@ -23,6 +23,9 @@ public class Player {
 
     public void regenMana() {
         mana += (intelligence * 0.5);
+        if (mana > maxMana) {
+            mana = maxMana;
+        }
     }
 
     public void drainMana(int amount) {

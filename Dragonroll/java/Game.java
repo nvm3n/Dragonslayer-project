@@ -11,6 +11,7 @@ public class Game {
     public void start() {
         System.out.println("Welcome to Dragonroll!");
         while (running) {
+            bossesDefeated = 0;
             setupPlayer();
             mainMenu();
         }
