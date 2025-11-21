@@ -8,6 +8,7 @@ public class Game {
     private boolean running = true;
     private Scanner scanner = new Scanner(System.in);
     private boolean freshStart = true;
+    private int tillBoss = 0;
     private Random rand = new Random();
 
     public void start() {
@@ -117,13 +118,23 @@ public class Game {
     }
 
     private void startFight() {
+        if (tillBoss == 10){
+            Boss boss = BossFactory.createRandomBoss(bossesDefeated);
+            System.out.println("\n" + boss.getName() + " appears!");
+            FightPhase fight = new FightPhase(player, boss, scanner);
+            fight.run();
+            if (boss.getHealth() <= 0) {
+                bossesDefeated++;
+                // Give wildcard reward, etc.
+            }
+            tillBoss = 0;
+        } else{
         Enemy enemy = EnemyFactory.createRandomEnemy(bossesDefeated);
         System.out.println("\nA wild " + enemy.getName() + " appears!");
         FightPhase fight = new FightPhase(player, enemy, scanner);
         fight.run();
-        if (enemy instanceof Boss && enemy.getHealth() <= 0) {
-            bossesDefeated++;
-            // Give wildcard reward, etc.
+        tillBoss++;
+        System.out.println(tillBoss);
         }
     }
 
