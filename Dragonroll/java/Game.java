@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 import java.util.ArrayList;
 
 public class Game {
@@ -7,6 +8,7 @@ public class Game {
     private boolean running = true;
     private Scanner scanner = new Scanner(System.in);
     private boolean freshStart = true;
+    private Random rand = new Random();
 
     public void start() {
         System.out.println("Welcome to Dragonroll!");
@@ -38,7 +40,7 @@ public class Game {
             case 1: player.giveStartingItems(ClassType.WARRIOR); break;
             case 2: player.giveStartingItems(ClassType.MAGE); break;
             default: System.out.println("Invalid choice, defaulting to Warrior.");
-                     player.giveStartingItems(ClassType.WARRIOR);
+                player.giveStartingItems(ClassType.WARRIOR);
         }
     }
 
@@ -103,6 +105,14 @@ public class Game {
                 case 6: running = false; System.out.println("Thanks for playing!"); return;
                 default: System.out.println("Invalid choice.");
             }
+        }
+    }
+
+    public void lootdrop(){
+        if (rand.nextBoolean() == true) {
+            
+        }else {
+
         }
     }
 

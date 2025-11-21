@@ -10,8 +10,8 @@ public class Player {
 
     public void giveStartingItems(ClassType classType) {
         switch (classType) {
-            case WARRIOR: inventory.addWeapon("Sword"); inventory.addArmor("Leather Armor"); equipWeapon("Sword"); equipArmor("Leather Armor");break;
-            case MAGE: inventory.addWeapon("Magic Wand"); inventory.addArmor("Mage Robe"); equipWeapon("Magic Wand"); equipArmor("Mage Robe");break;
+            case WARRIOR: inventory.addWeaponByName("Sword"); inventory.addArmorByName("Leather Armor"); equipWeapon("Sword"); equipArmor("Leather Armor");break;
+            case MAGE: inventory.addWeaponByName("Magic Wand"); inventory.addArmorByName("Mage Robe"); equipWeapon("Magic Wand"); equipArmor("Mage Robe");break;
         }
     }
 

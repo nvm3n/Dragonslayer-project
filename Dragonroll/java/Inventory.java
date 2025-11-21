@@ -14,8 +14,12 @@ public class Inventory {
         System.out.println("Armors: " + (armor.isEmpty() ? "None" : String.join(", ", getArmors())));
     }
 
+    /*public void addRandomWeaponByRarity(Rarity pRarity) {
+        Weapon[] weaponsRChoice = WeaponDatabase.findWeaponByRarity(pRarity);
+         
+    }*/
     
-    public void addWeapon(String weaponName) {
+    public void addWeaponByName(String weaponName) {
     Weapon foundWeapon = WeaponDatabase.findWeaponByName(weaponName);
     if (foundWeapon != null) {
         this.weapon.add(foundWeapon);
@@ -46,7 +50,7 @@ public class Inventory {
 
     }    **/
 
-    public void addArmor(String armorName) {
+    public void addArmorByName(String armorName) {
     Armor foundArmor = ArmorDatabase.findArmorByName(armorName);
     if (foundArmor != null) {
         this.armor.add(foundArmor);
