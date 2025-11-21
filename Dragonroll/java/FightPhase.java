@@ -27,14 +27,14 @@ public class FightPhase {
             turncount ++;
             boolean playerFirst = determineTurnOrder(player.getAgility(), enemy.getAgility());
             try {
-                        Thread.sleep(3000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         Thread.currentThread();
                     }
             System.out.println("\nTurn " + turncount + " begins.");
 
             try {
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         Thread.currentThread();
                     }
@@ -43,7 +43,7 @@ public class FightPhase {
                 System.out.println("\nYou attack first!");
 
                 try {
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         Thread.currentThread();
                     }
@@ -108,7 +108,7 @@ public class FightPhase {
                 if (rand.nextDouble() < dodgeChance) {
                     System.out.println("Enemy dodged your attack!");
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         Thread.currentThread();
                     }
@@ -197,13 +197,13 @@ public class FightPhase {
         int attackIndex = rand.nextInt(attacks.length);
         Attack chosenAttack = attacks[attackIndex];
         try {
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         Thread.currentThread();
                     }
         System.out.println("Enemy uses " + chosenAttack.getName() + "!");
         try {
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         Thread.currentThread();
                     }
@@ -225,7 +225,7 @@ public class FightPhase {
         System.out.println("The enemy has " + enemy.getHealth() + " health!");
 
         try {
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         Thread.currentThread();
                     }

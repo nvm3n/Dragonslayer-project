@@ -9,6 +9,13 @@
             "name": "Game",
             "request": "launch",
             "mainClass": "Game",
+            "projectName": "Dragonslayer-project-1_503b02bd"
+        },
+        {
+            "type": "java",
+            "name": "Game",
+            "request": "launch",
+            "mainClass": "Game",
             "projectName": "Dragonslayer-project_9759868"
         },
         {
